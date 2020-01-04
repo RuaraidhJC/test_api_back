@@ -1,13 +1,6 @@
 version: '3.3'
 
 services:
-  back-api:
-    build: ./promocode
-    restart: always
-    environment:
-      NODE_ENV: development
-    ports:
-      - '3000:3000'
   db:
     image: mysql:5.7
     restart: always
@@ -20,6 +13,16 @@ services:
       - '3306:3306'
     volumes:
       - my-db:/var/lib/mysql
+  back-api:
+    build: ./promocode
+    restart: always
+    environment:
+      NODE_ENV: development
+    ports:
+      - '3000:3000'
+  weather:
+    build: ./weather
+    restart: always
 
 volumes:
   my-db:
