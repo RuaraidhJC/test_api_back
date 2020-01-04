@@ -5,7 +5,7 @@ const checker = require('./checker.js');
 const orChecker = (data, array) => {
     console.log('orChecker', data, array);
     if (!Array.isArray(array) || !array.length) {
-        throw new Error('@and/@or must be a populated array');
+        throw new Error('@or must be a populated array');
     }
     let ret = false;
     array.forEach(item => {
@@ -24,9 +24,10 @@ const orChecker = (data, array) => {
 }
 
 const andChecker = (data, array) => {
+    console.log(Array.isArray(array));
     if (!Array.isArray(array) || !array.length) {
         console.log(array);
-        throw new Error('@and/@or must be a populated array');
+        throw new Error('@and must be a populated array');
     }
     let ret = true;
     for (let cpt = 0; cpt < array.length; cpt++) {

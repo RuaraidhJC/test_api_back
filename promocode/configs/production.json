@@ -1,0 +1,8 @@
+{
+    "env": "development",
+    "hostname": "localhost",
+    "port": 3306,
+    "database": "db",
+    "user": "user",
+    "password": "password"
+}

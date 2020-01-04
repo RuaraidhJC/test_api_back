@@ -97,11 +97,9 @@ let schema = {
   }
 
 
-const promocodeChecker = (data) => {
+const promocodeChecker = (data, restrictions) => {
     const checker = require('./checkers/or-checker.js');
-    console.log(schema2.restrictions["@and"]);
-    console.log(checker(data, schema2.restrictions["@and"]));
-
+    return checker(data, restrictions["@and"]);
 }
 
 module.exports = promocodeChecker;

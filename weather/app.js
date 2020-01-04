@@ -5,14 +5,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const promocodeRouter = require('./routes/promocode');
 
 var app = express();
-
-const db = require('./models/db');
-db.sequelize.sync({force: false}).then(() => {
-
-});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -21,7 +15,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/promocode', promocodeRouter);
 app.use('/users', usersRouter);
 
 module.exports = app;
