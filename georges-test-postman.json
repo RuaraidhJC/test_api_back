@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "4aa0bfe8-9130-4bca-93d3-9acfe0bb0049",
+		"name": "georges test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Simple @OR @AGE with both EQ and GT/LT",
+			"item": [
+				{
+					"name": "Add code",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"OrAgeCode\",\n    \"avantage\": { \"percent\": 50 },\n    \"restrictions\": {\n      \"@and\": [\n        {\n            \"@or\": [\n                {\n                    \"@age\": {\n                        \"eq\": 40\n                    }\n                },\n                {\n                    \"@age\": {\n                        \"lt\": 18,\n                        \"gt\": 15\n                    }\n                }\n              ]\n        }\n      ]\n    }\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/promocode/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"promocode",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[accepted] Check age EQ 40",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"promocode_name\": \"OrAgeCode\",\n  \"arguments\": {\n    \"age\": 40\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/promocode/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"promocode",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[accepted] Check age GT 15 and LT 18",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"promocode_name\": \"OrAgeCode\",\n  \"arguments\": {\n    \"age\": 17\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/promocode/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"promocode",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[denied] Age 25, should fail",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"promocode_name\": \"OrAgeCode\",\n  \"arguments\": {\n    \"age\": 25\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/promocode/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"promocode",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[400] Bad Name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"promocode_name\": \"OrAgeCode3\",\n  \"arguments\": {\n    \"age\": 40\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/promocode/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"promocode",
+								"request"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Simple @OR @AGE with @AND @DATE",
+			"item": [
+				{
+					"name": "Add code",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"OrAgeAndDateCode\",\n    \"avantage\": { \"percent\": 50 },\n    \"restrictions\": {\n      \"@and\": [\n        {\n            \"@or\": [\n                {\n                    \"@age\": {\n                        \"eq\": 40\n                    }\n                },\n                {\n                    \"@age\": {\n                        \"lt\": 18,\n                        \"gt\": 15\n                    }\n                },\n                {\"@and\": [\n\t                {\n\t                    \"@date\": {\n        \t\t\t\t\t\"before\": \"2021-01-01\",\n        \t\t\t\t\t\"after\": \"2018-01-01\"\n        \t\t\t\t}\n\t                },\n\t                {\n\t                    \"@date\": {\n        \t\t\t\t\t\"before\": \"2020-01-01\",\n        \t\t\t\t\t\"after\": \"2019-01-01\"\n        \t\t\t\t}\n\t                }\n\t              ]\n              }]\n        },\n        {\n        \t\"@date\": {\n        \t\t\"before\": \"2021-01-01\",\n        \t\t\"after\": \"2018-01-01\"\n        \t}\t\n        }\n      ]\n    }\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/promocode/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"promocode",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[accepted] Correct age and date",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"promocode_name\": \"OrAgeAndDateCode\",\n  \"arguments\": {\n    \"age\": 40,\n    \"date\": \"2019-01-01\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/promocode/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"promocode",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[accepted] Correct age and date Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"promocode_name\": \"OrAgeAndDateCode\",\n  \"arguments\": {\n    \"age\": 40,\n    \"date\": \"2019-01-01\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/promocode/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"promocode",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[denied] correct age no date",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"promocode_name\": \"OrAgeAndDateCode\",\n  \"arguments\": {\n    \"age\": 40\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/promocode/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"promocode",
+								"request"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Deeper @AND",
+			"item": [
+				{
+					"name": "Add code",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"DeepCode\",\n    \"avantage\": { \"percent\": 50 },\n    \"restrictions\": {\n      \"@and\": [\n        {\n            \"@or\": [\n                {\n                    \"@age\": {\n                        \"eq\": 40\n                    }\n                },\n                {\n                    \"@age\": {\n                        \"lt\": 18,\n                        \"gt\": 15\n                    }\n                },\n                {\"@and\": [\n\t                {\n\t                    \"@date\": {\n        \t\t\t\t\t\"before\": \"2021-01-01\",\n        \t\t\t\t\t\"after\": \"2018-01-01\"\n        \t\t\t\t}\n\t                },\n\t                {\n\t                    \"@date\": {\n        \t\t\t\t\t\"before\": \"2020-01-01\",\n        \t\t\t\t\t\"after\": \"2019-01-01\"\n        \t\t\t\t}\n\t                }\n\t              ]\n              }]\n        },\n        {\n        \t\"@date\": {\n        \t\t\"before\": \"2021-01-01\",\n        \t\t\"after\": \"2018-01-01\"\n        \t}\t\n        }\n      ]\n    }\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/promocode/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"promocode",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[accepted] Correct age and date Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"promocode_name\": \"DeepCode\",\n  \"arguments\": {\n    \"age\": 27,\n    \"date\": \"2019-02-02\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/promocode/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"promocode",
+								"request"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
