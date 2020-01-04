@@ -1,0 +1,4 @@
+AJV validation ?
+
+weather microservice
+
